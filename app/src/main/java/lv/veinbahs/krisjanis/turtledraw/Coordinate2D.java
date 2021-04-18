@@ -1,7 +1,6 @@
 package lv.veinbahs.krisjanis.turtledraw;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 // Coordinate grid is conceptually to be thought of as follows:
 // -1/-1 +0/-1 +1/-1
@@ -16,14 +15,16 @@ public class Coordinate2D {
         this.y = y;
     }
 
-    public void add(Coordinate2D c) {
-        this.x += c.x;
-        this.y += c.y;
+    public Coordinate2D(Coordinate2D c) {
+        this.x = c.x;
+        this.y = c.y;
     }
 
-    public void sub(Coordinate2D c) {
-        this.x -= c.x;
-        this.y -= c.y;
+    public Coordinate2D add(Coordinate2D that) {
+        Coordinate2D c = new Coordinate2D(this);
+        c.x += that.x;
+        c.y += that.y;
+        return c;
     }
 
     @Override
