@@ -16,6 +16,21 @@ public class Direction2DHelper {
         }
     }
 
+    public static int directionAsAngle(Direction2D direction) {
+        switch (direction) {
+            case N:
+                return 0;
+            case S:
+                return 180;
+            case W:
+                return 270;
+            case E:
+                return 90;
+            default:
+                throw new Error("Unexpected direction");
+        }
+    }
+
     public static Direction2D directionRotate(Direction2D direction, Rotation2D rotation) {
         switch (rotation) {
             case Clockwise:

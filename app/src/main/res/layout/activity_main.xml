@@ -17,20 +17,7 @@
             android:layout_height="fill_parent"
             android:layout_above="@+id/turtle_main_controls"
             android:layout_alignParentTop="true"
-            android:gravity="center"
         >
-            <RelativeLayout
-                android:id="@+id/turtle_square_layer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-            >
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/turtle_player_layer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-            >
-            </RelativeLayout>
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/turtle_main_controls"
