@@ -14,12 +14,12 @@ public class GameEngine {
     }
 
     public void initialize() {
-        this.leaveTurtlePrint(this.state.player.position);
+        this.leaveTurtlePrint();
     }
 
-    protected void leaveTurtlePrint(Coordinate2D position) {
-        if (!this.state.player.raised && !this.isSquareThere(position)) {
-            this.state.squares.add(new Square(position));
+    protected void leaveTurtlePrint() {
+        if (!this.state.player.raised && !this.isSquareThere(this.state.player.position)) {
+            this.state.squares.add(new Square(this.state.player.position));
         }
     }
 
@@ -35,8 +35,8 @@ public class GameEngine {
         if (destination.x > (this.state.width - 1)) return false;
         if (destination.y > (this.state.height - 1)) return false;
 
-        this.leaveTurtlePrint(destination);
         this.state.player.position = destination;
+        this.leaveTurtlePrint();
 
         return true;
     }
@@ -54,7 +54,7 @@ public class GameEngine {
 
     public void playerLower() {
         this.state.player.raised = false;
-        this.leaveTurtlePrint(this.state.player.position);
+        this.leaveTurtlePrint();
     }
 
     public boolean isSquareThere(Coordinate2D position) {
@@ -69,6 +69,7 @@ public class GameEngine {
 
     public void flushSquares() {
         this.state.squares = new LinkedList<Square>();
+        this.leaveTurtlePrint();
     }
 }
 

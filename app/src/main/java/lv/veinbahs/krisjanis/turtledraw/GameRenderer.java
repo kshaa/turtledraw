@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class GameRenderer {
 
     protected int turtleImageResource = R.drawable.turtle;
     protected int squareColor = Color.parseColor("#9effb8");
+    protected int wallColor = Color.parseColor("#3b3b3b");
     protected Logger logger;
     protected int lastWidth;
     protected int lastHeight;
@@ -57,9 +59,9 @@ public class GameRenderer {
         return player;
     }
 
-    protected View createSquare() {
+    protected View createSquare(int color) {
         View square = new View(context);
-        square.setBackgroundColor(squareColor);
+        square.setBackgroundColor(color);
         square.setLayoutParams(this.createLinearLayoutParams());
 
         return square;
@@ -96,13 +98,13 @@ public class GameRenderer {
         layout.removeAllViews();
 
         // Render squares
-        int i = 0;
+        int squareCounter = 0;
         for (Square squareData : state.squares) {
-            logger.log(Level.FINE, String.format("[render entity] square no. %s", i));
-            View squareView = this.createSquare();
+            logger.log(Level.FINE, String.format("[render entity] square no. %s", squareCounter));
+            View squareView = this.createSquare(squareColor);
             this.setPosition(state.width, state.height, squareView, squareData.position);
             layout.addView(squareView);
-            i++;
+            squareCounter++;
         }
 
         // Render player
@@ -111,6 +113,21 @@ public class GameRenderer {
         player.setRotation(Direction2DHelper.directionAsAngle(state.player.direction));
         this.setPosition(state.width, state.height, player, state.player.position);
         layout.addView(player);
+
+        // Render border walls
+        LinkedList<Coordinate2D> walls = new LinkedList<Coordinate2D>();
+        for (int i = -1; i < state.width + 1; i++) walls.add(new Coordinate2D(i, -1));
+        for (int i = -1; i < state.width + 1; i++) walls.add(new Coordinate2D(i, state.height));
+        for (int i = 0; i < state.height; i++) walls.add(new Coordinate2D(-1, i));
+        for (int i = 0; i < state.height; i++) walls.add(new Coordinate2D(state.width, i));
+        int wallCounter = 0;
+        for (Coordinate2D wallData : walls) {
+            logger.log(Level.FINE, String.format("[render entity] wall no. %s", wallCounter));
+            View wallView = this.createSquare(wallColor);
+            this.setPosition(state.width, state.height, wallView, wallData);
+            layout.addView(wallView);
+            wallCounter++;
+        }
 
         // Remember this render for resize event purposes
         this.lastWidth = layout.getMeasuredWidth();
