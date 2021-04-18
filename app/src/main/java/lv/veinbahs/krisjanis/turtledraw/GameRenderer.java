@@ -110,6 +110,9 @@ public class GameRenderer {
         // Render player
         logger.log(Level.FINE, "[render entity] player");
         ImageView player = this.createPlayer();
+        if (state.player.raised) {
+            player.setAlpha(125);
+        }
         player.setRotation(Direction2DHelper.directionAsAngle(state.player.direction));
         this.setPosition(state.width, state.height, player, state.player.position);
         layout.addView(player);

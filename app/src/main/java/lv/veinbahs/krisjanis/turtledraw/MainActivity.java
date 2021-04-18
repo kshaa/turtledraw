@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Static configurations
         int cellSizeDp = 35; // Game board cell size in dp
-        float sideMarginDp = 0; // Game board side margin in dp
+        float sideMarginDp = 10; // Game board side margin in dp
+        float magicHeightOffsetDp = 300; // This is subtracted from device height to calculate available board height
 
         // Calculate engine parameters based on device size & static configurations
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = (displayMetrics.heightPixels / displayMetrics.density) - sideMarginDp * 2;
+        float dpHeight = (displayMetrics.heightPixels / displayMetrics.density) - sideMarginDp * 2 - magicHeightOffsetDp;
         float dpWidth = (displayMetrics.widthPixels / displayMetrics.density) - sideMarginDp * 2;
         int cellsX = (int) (dpWidth / cellSizeDp) - 2; // Two cells required for walls
         int cellsY = (int) (dpHeight / cellSizeDp) - 2; // Two cells required for walls
