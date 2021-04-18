@@ -27,30 +27,34 @@
             android:gravity="center"
         >
             <Button
+                android:id="@+id/raise"
                 android:text="@string/raise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp" />
             <Button
+                android:id="@+id/lower"
                 android:text="@string/lower"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp" />
             <Button
-                android:text="@string/plus_90deg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp" />
-            <Button
+                android:id="@+id/minus90Deg"
                 android:text="@string/minus_90deg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp"
                 tools:ignore="ButtonStyle" />
+            <Button
+                android:id="@+id/plus90Deg"
+                android:text="@string/plus_90deg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/turtle_meta_controls"
@@ -60,6 +64,21 @@
             android:gravity="center"
             >
             <Button
+                android:id="@+id/move"
+                android:text="@string/move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp" />
+            <Button
+                android:id="@+id/flush"
+                android:text="@string/flush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp" />
+            <Button
+                android:id="@+id/fin"
                 android:text="@string/fin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

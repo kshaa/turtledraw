@@ -5,4 +5,6 @@
     <string name="plus_90deg">+90deg</string>
     <string name="minus_90deg">-90deg</string>
     <string name="fin">Fin</string>
+    <string name="move">Move</string>
+    <string name="flush">Flush</string>
 </resources>

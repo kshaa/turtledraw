@@ -13,8 +13,17 @@ public class GameEngine {
         return this.state;
     }
 
+    public void initialize() {
+        this.leaveTurtlePrint(this.state.player.position);
+    }
+
+    protected void leaveTurtlePrint(Coordinate2D position) {
+        if (!this.state.player.raised && !this.isSquareThere(position)) {
+            this.state.squares.add(new Square(position));
+        }
+    }
+
     public boolean playerForward() {
-        Coordinate2D source = new Coordinate2D(this.state.player.position);
         Coordinate2D destination = this.state.player.position.add(
             Direction2DHelper.directionAsCoordinate(
                 this.state.player.direction
@@ -26,10 +35,7 @@ public class GameEngine {
         if (destination.x > (this.state.width - 1)) return false;
         if (destination.y > (this.state.height - 1)) return false;
 
-        if (!this.isSquareThere(source)) {
-            this.state.squares.add(new Square(source));
-        }
-
+        this.leaveTurtlePrint(destination);
         this.state.player.position = destination;
 
         return true;
@@ -40,6 +46,15 @@ public class GameEngine {
             this.state.player.direction,
             rotation
         );
+    }
+
+    public void playerRaise() {
+        this.state.player.raised = true;
+    }
+
+    public void playerLower() {
+        this.state.player.raised = false;
+        this.leaveTurtlePrint(this.state.player.position);
     }
 
     public boolean isSquareThere(Coordinate2D position) {

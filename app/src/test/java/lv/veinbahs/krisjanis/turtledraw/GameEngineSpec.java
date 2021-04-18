@@ -8,6 +8,12 @@ import static org.junit.Assert.assertTrue;
 
 public class GameEngineSpec {
     @Test
+    public void initialPlayerPrint() {
+        GameEngine engine = GameEngineFactory.createGameEngine(5, 5);
+        assertTrue(engine.isSquareThere(new Coordinate2D(2, 2)));
+    }
+
+    @Test
     public void playerDirection() {
         GameEngine engine = GameEngineFactory.createGameEngine(5, 5);
         assertEquals(engine.state.player.direction, Direction2D.N);
@@ -59,6 +65,7 @@ public class GameEngineSpec {
         GameEngine engine = GameEngineFactory.createGameEngine(5, 5);
         engine.playerForward();
         assertTrue(engine.isSquareThere(new Coordinate2D(2, 2)));
+        assertTrue(engine.isSquareThere(new Coordinate2D(2, 1)));
     }
 
     @Test

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,7 +22,7 @@ public class GameRenderer {
     protected int pixelHeight;
 
     protected int turtleImageResource = R.drawable.turtle;
-    protected int squareColor = Color.parseColor("#8B008B");
+    protected int squareColor = Color.parseColor("#9effb8");
     protected Logger logger;
     protected int lastWidth;
     protected int lastHeight;
@@ -77,8 +76,8 @@ public class GameRenderer {
         int entityOffsetX = position.x * pixelWidth;
         int entityOffsetY = position.y * pixelHeight;
 
-        logger.log(Level.INFO, String.format("[position x] cx=%s, cox=%s, eox=%s", centerX, centerOffsetX, entityOffsetX));
-        logger.log(Level.INFO, String.format("[position y] cy=%s, coy=%s, eoy=%s", centerY, centerOffsetY, entityOffsetY));
+        logger.log(Level.FINE, String.format("[position x] cx=%s, cox=%s, eox=%s", centerX, centerOffsetX, entityOffsetX));
+        logger.log(Level.FINE, String.format("[position y] cy=%s, coy=%s, eoy=%s", centerY, centerOffsetY, entityOffsetY));
         params.setMargins(
                 centerX + centerOffsetX + entityOffsetX,
                 centerY + centerOffsetY + entityOffsetY,
@@ -87,26 +86,31 @@ public class GameRenderer {
         );
     }
 
+    public void render() {
+        if (this.lastState == null) this.logger.log(Level.WARNING, "[re-render] Trying to re-render a non-existent game state");
+        this.render(this.lastState);
+    }
+
     public void render(GameState state) {
         // Remove old renders
         layout.removeAllViews();
 
-        // Render player
-        logger.log(Level.INFO, "[render entity] player");
-        ImageView player = this.createPlayer();
-        player.setRotation(Direction2DHelper.directionAsAngle(state.player.direction));
-        this.setPosition(state.width, state.height, player, state.player.position);
-        layout.addView(player);
-
         // Render squares
         int i = 0;
         for (Square squareData : state.squares) {
-            logger.log(Level.INFO, String.format("[render entity] square no. %s", i));
+            logger.log(Level.FINE, String.format("[render entity] square no. %s", i));
             View squareView = this.createSquare();
             this.setPosition(state.width, state.height, squareView, squareData.position);
             layout.addView(squareView);
             i++;
         }
+
+        // Render player
+        logger.log(Level.FINE, "[render entity] player");
+        ImageView player = this.createPlayer();
+        player.setRotation(Direction2DHelper.directionAsAngle(state.player.direction));
+        this.setPosition(state.width, state.height, player, state.player.position);
+        layout.addView(player);
 
         // Remember this render for resize event purposes
         this.lastWidth = layout.getMeasuredWidth();
