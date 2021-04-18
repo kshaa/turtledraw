@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">turtledraw</string>
+    <string name="raise">Raise</string>
+    <string name="lower">Lower</string>
+    <string name="plus_90deg">+90deg</string>
+    <string name="minus_90deg">-90deg</string>
+    <string name="fin">Fin</string>
 </resources>
